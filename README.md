@@ -2,6 +2,25 @@
 
 Persistent Windows AI companion with a frameless pixel-art overlay, keepalive daemon behavior, Telegram alerts, SQLite memory, and pluggable AI backends.
 
+![Companion terminal screenshot](assets/companion-terminal.png)
+
+## Status Preview
+
+<table>
+  <tr>
+    <td align="center"><strong>Idle</strong></td>
+    <td align="center"><strong>Thinking</strong></td>
+    <td align="center"><strong>Remote</strong></td>
+    <td align="center"><strong>Alert</strong></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="assets/sprites/idle/idle_00.png" alt="Idle sprite" width="120"></td>
+    <td align="center"><img src="assets/sprites/thinking/thinking_00.png" alt="Thinking sprite" width="120"></td>
+    <td align="center"><img src="assets/sprites/remote/remote_00.png" alt="Remote sprite" width="120"></td>
+    <td align="center"><img src="assets/sprites/alert/alert_00.png" alt="Alert sprite" width="120"></td>
+  </tr>
+</table>
+
 ## Current Capabilities
 - Windows idle/presence detection and mode switching
 - Keepalive jitter using Win32 APIs
