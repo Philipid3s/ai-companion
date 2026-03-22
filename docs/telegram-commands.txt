@@ -1,0 +1,9 @@
+help - Show available commands
+ping - Check bot connectivity
+status - Show companion status
+processes - Show top CPU processes
+mode - Show current presence mode
+model - Get or set the active AI backend
+ask - Send a prompt to the active AI backend
+note - Append a note to memory
+memory - List stored memory notes

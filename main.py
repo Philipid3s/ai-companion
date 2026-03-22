@@ -69,6 +69,10 @@ def configure_logging() -> None:
         force=True,
     )
 
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    logging.getLogger("httpcore").setLevel(logging.WARNING)
+
+
 
 def configure_qt_attributes() -> None:
     app_attr = getattr(Qt, "ApplicationAttribute", None)
@@ -254,4 +258,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
 
