@@ -89,12 +89,13 @@ class FakePresenceDetector:
     def __init__(self) -> None:
         self.mode = "local"
         self.last_marked_idle: int | None = None
+        self.next_evaluation: tuple[str, bool] = ("local", False)
 
     def get_mode(self) -> str:
         return self.mode
 
     def evaluate_mode(self) -> tuple[str, bool]:
-        return self.mode, False
+        return self.next_evaluation
 
     def get_idle_milliseconds(self) -> int:
         return 240000
@@ -252,6 +253,31 @@ class SchedulerTests(unittest.IsolatedAsyncioTestCase):
             await scheduler.chat_with_ai("hi")
 
         self.assertEqual(states, ["thinking", "remote"])
+
+    async def test_presence_tick_sends_alerts_for_both_mode_transitions(self) -> None:
+        presence = FakePresenceDetector()
+        scheduler = CompanionScheduler(build_config(), presence)
+        scheduler.memory = FakeMemory(selected_model="ollama")
+        scheduler.keepalive = FakeKeepalive()
+        scheduler.telegram = FakeTelegram()
+
+        scheduler.monitor.check_alerts = lambda: []
+
+        presence.mode = "remote"
+        presence.next_evaluation = ("remote", True)
+        await scheduler._presence_and_monitoring_tick()
+
+        presence.mode = "local"
+        presence.next_evaluation = ("local", True)
+        await scheduler._presence_and_monitoring_tick()
+
+        self.assertEqual(
+            scheduler.telegram.sent,
+            [
+                "Presence mode changed to remote.",
+                "Presence mode changed to local.",
+            ],
+        )
 
 
 if __name__ == "__main__":

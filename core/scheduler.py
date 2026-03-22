@@ -210,8 +210,7 @@ class CompanionScheduler:
                 f"Presence mode switched to {mode}.",
                 "remote" if mode == "remote" else "idle",
             )
-            if mode == "remote":
-                await self._notify_remote_mode()
+            await self._notify_mode_change(mode)
 
         alerts = self.monitor.check_alerts()
         for alert in alerts:
@@ -254,8 +253,8 @@ class CompanionScheduler:
             )
         await self._schedule_keepalive_once()
 
-    async def _notify_remote_mode(self) -> None:
-        await self._send_alert("Presence mode changed to remote.")
+    async def _notify_mode_change(self, mode: str) -> None:
+        await self._send_alert(f"Presence mode changed to {mode}.")
 
     async def _send_alert(self, message: str) -> None:
         try:
