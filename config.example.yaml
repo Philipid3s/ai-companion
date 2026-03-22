@@ -1,0 +1,34 @@
+telegram:
+  token: ""
+  chat_id: ""
+
+presence:
+  idle_threshold_seconds: 300
+  mode_switch_hysteresis: 2
+
+keepalive:
+  min_interval_seconds: 180
+  max_interval_seconds: 420
+  mouse_delta_max_px: 3
+
+monitoring:
+  cpu_alert_threshold: 85
+  ram_alert_threshold: 90
+  check_interval_seconds: 30
+
+ai:
+  default_model: ollama
+  ollama_url: http://localhost:11434
+  ollama_model: qwen3:8b
+  gemini_api_key: ""
+  groq_api_key: ""
+  fallback_order:
+    - ollama
+    - groq
+    - gemini
+
+ui:
+  sprite: default
+  position: bottom-right
+  margin_px: 20
+  bubble_duration_ms: 6000
